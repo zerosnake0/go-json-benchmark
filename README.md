@@ -65,14 +65,14 @@ go test -v -bench ./...
 ## feature list
 
 | repo | unmarshal (interface) | unmarshal (struct) | iterator |
-| -------------------------------------- | -- | -- | -- |
-| encoding/json                          |  x |  x |    |
-| github.com/json-iterator/go            |  x |  x |  x |
-| github.com/buger/jsonparser            |    |    |  x |
-| github.com/a8m/djson                   |  x |    |    |
-| github.com/mailru/easyjson             |  x | *1 |    |
-| github.com/mreiferson/go-ujson         | *2 |    |    |
-| github.com/ugorji/go/codec             | *3 | *4 |    |
+| -------------------------------------- | --------------- | --------------- | - |
+| encoding/json                          | x               | x               |   |
+| github.com/json-iterator/go            | x               | x               | x |
+| github.com/buger/jsonparser            |                 |                 | x |
+| github.com/a8m/djson                   | x               |                 |   |
+| github.com/mailru/easyjson             | x               | <sup>(1)</sup>  |   |
+| github.com/mreiferson/go-ujson         | x<sup>(2)</sup> |                 |   |
+| github.com/ugorji/go/codec             | x<sup>(3)</sup> | x<sup>(4)</sup> |   |
 
 ### notes:
 1. easyjson use its own marshaler/unmarshaler, which is not tested
