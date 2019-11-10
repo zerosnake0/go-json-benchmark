@@ -7,4 +7,5 @@ const (
 	pkgJsoniterReadObjCB  = "jsoniter-readObjCB"
 	pkgJsoniterCompatible = "jsoniter-compatible"
 	pkgJsonparser         = "jsonparser"
+	pkgDjson              = "djson"
 )
