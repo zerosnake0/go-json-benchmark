@@ -10,4 +10,5 @@ const (
 	pkgDjson              = "djson"
 	pkgEasyJson           = "easyjson"
 	pkgUjson              = "ujson"
+	pkgUgorji             = "ugorji"
 )

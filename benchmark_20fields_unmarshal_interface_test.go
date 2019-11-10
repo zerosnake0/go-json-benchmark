@@ -7,7 +7,7 @@ import (
 )
 
 func Test_20Fields_Unmarshal_Interface(t *testing.T) {
-	Test_Unmarshal_interface(t, func(t *testing.T, cb func(data []byte) (o interface{}, err error)) {
+	Test_Unmarshal_Interface(t, func(t *testing.T, cb func(data []byte) (o interface{}, err error)) {
 		o, err := cb(twentyFieldsByte)
 		require.NoError(t, err)
 		m, ok := o.(map[string]interface{})

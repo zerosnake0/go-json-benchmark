@@ -6,29 +6,15 @@ import (
 
 	"github.com/json-iterator/go"
 	"github.com/stretchr/testify/require"
+	ugorji "github.com/ugorji/go/codec"
 )
 
 func Test_10Fields_Unmarshal_StructWithTag(t *testing.T) {
-	f := func(t *testing.T, cb func(data []byte, o interface{}) error) {
+	Test_Unmarshal_StructWithTag(t, func(t *testing.T, cb func(data []byte, o interface{}) error) {
 		var o tenFieldsStructWithTag
 		err := cb(tenFieldsByte, &o)
 		require.NoError(t, err)
 		require.Equal(t, tenFieldsStructWithTagResult, o)
-	}
-	t.Run(pkgJson, func(t *testing.T) {
-		f(t, func(data []byte, o interface{}) error {
-			return json.Unmarshal(data, o)
-		})
-	})
-	t.Run(pkgJsoniter, func(t *testing.T) {
-		f(t, func(data []byte, o interface{}) error {
-			return jsoniter.Unmarshal(data, o)
-		})
-	})
-	t.Run(pkgJsoniterCompatible, func(t *testing.T) {
-		f(t, func(data []byte, o interface{}) error {
-			return jsoniter.ConfigCompatibleWithStandardLibrary.Unmarshal(data, o)
-		})
 	})
 }
 
@@ -52,6 +38,19 @@ func Benchmark_10Fields_Unmarshal_StructWithTag(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			var o tenFieldsStructWithTag
 			jsoniter.ConfigCompatibleWithStandardLibrary.Unmarshal(tenFieldsByte, &o)
+		}
+	})
+	b.Run(pkgUgorji, func(b *testing.B) {
+		b.ReportAllocs()
+		h := ugorji.JsonHandle{
+			PreferFloat:    true,
+			MapKeyAsString: true,
+		}
+		b.ResetTimer()
+		for i := 0; i < b.N; i++ {
+			dec := ugorji.NewDecoderBytes(tenFieldsByte, &h)
+			var o tenFieldsStructWithTag
+			dec.Decode(&o)
 		}
 	})
 }

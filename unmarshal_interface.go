@@ -8,9 +8,10 @@ import (
 	"github.com/a8m/djson"
 	"github.com/mailru/easyjson/jlexer"
 	"github.com/mreiferson/go-ujson"
+	ugorji "github.com/ugorji/go/codec"
 )
 
-func Test_Unmarshal_interface(t *testing.T, f func(t *testing.T, cb func(data []byte) (o interface{}, err error))) {
+func Test_Unmarshal_Interface(t *testing.T, f func(t *testing.T, cb func(data []byte) (o interface{}, err error))) {
 	t.Run(pkgJson, func(t *testing.T) {
 		f(t, func(data []byte) (o interface{}, err error) {
 			err = json.Unmarshal(data, &o)
@@ -48,6 +49,16 @@ func Test_Unmarshal_interface(t *testing.T, f func(t *testing.T, cb func(data []
 		f(t, func(data []byte) (o interface{}, err error) {
 			j := ujson.NewDecoder(defaultUjsonObjectStore, data)
 			return j.Decode()
+		})
+	})
+	t.Run(pkgUgorji, func(t *testing.T) {
+		f(t, func(data []byte) (o interface{}, err error) {
+			dec := ugorji.NewDecoderBytes(data, &ugorji.JsonHandle{
+				PreferFloat:    true,
+				MapKeyAsString: true,
+			})
+			err = dec.Decode(&o)
+			return
 		})
 	})
 }
@@ -93,6 +104,17 @@ func Benchmark_Unmarshal_Interface(b *testing.B, data []byte) {
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {
 			ujson.NewFromBytes(data)
+		}
+	})
+	b.Run(pkgUgorji, func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			dec := ugorji.NewDecoderBytes(data, &ugorji.JsonHandle{
+				PreferFloat:    true,
+				MapKeyAsString: true,
+			})
+			var o interface{}
+			dec.Decode(&o)
 		}
 	})
 }

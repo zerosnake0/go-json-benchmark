@@ -56,7 +56,7 @@ var twentyFieldsStructWoTagResult twentyFieldsStructWoTag
 
 type twentyFieldsStructWithTag struct {
 	Intf     int    `json:"intf"`
-	Uintf    uint   `json:"uint"`
+	Uintf    uint   `json:"uintf"`
 	Stringf  string `json:"stringf"`
 	Uuidf    string `json:"uuidf"`
 	Ipf      string `json:"ipf"`
@@ -65,16 +65,16 @@ type twentyFieldsStructWithTag struct {
 	Uint32f  uint32 `json:"uint32f"`
 	Int64f   int64  `json:"int64f"`
 	Uint64f  uint64 `json:"uint64f"`
-	Intf2    int    `json:"intf2 "`
-	Uintf2   uint   `json:"uint"`
-	Stringf2 string `json:"stringf2 "`
-	Uuidf2   string `json:"uuidf2 "`
-	Ipf2     string `json:"ipf2 "`
-	Emailf2  string `json:"emailf2 "`
-	Int32f2  int32  `json:"int32f2 "`
-	Uint32f2 uint32 `json:"uint32f2 "`
-	Int64f2  int64  `json:"int64f2 "`
-	Uint64f2 uint64 `json:"uint64f2 "`
+	Intf2    int    `json:"intf2"`
+	Uintf2   uint   `json:"uintf2"`
+	Stringf2 string `json:"stringf2"`
+	Uuidf2   string `json:"uuidf2"`
+	Ipf2     string `json:"ipf2"`
+	Emailf2  string `json:"emailf2"`
+	Int32f2  int32  `json:"int32f2"`
+	Uint32f2 uint32 `json:"uint32f2"`
+	Int64f2  int64  `json:"int64f2"`
+	Uint64f2 uint64 `json:"uint64f2"`
 }
 
 var twentyFieldsStructWithTagResult twentyFieldsStructWithTag
