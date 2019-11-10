@@ -8,4 +8,6 @@ const (
 	pkgJsoniterCompatible = "jsoniter-compatible"
 	pkgJsonparser         = "jsonparser"
 	pkgDjson              = "djson"
+	pkgEasyJson           = "easyjson"
+	pkgUjson              = "ujson"
 )
