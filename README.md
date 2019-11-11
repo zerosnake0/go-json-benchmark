@@ -80,7 +80,7 @@ go test -v -bench ./...
 3. ugorji need to be configured in order to be compatible with standard library
 4. ugorji decode into structure:
    - can decode into a structure with tag
-   - cannot decode into a structure without a tag unless all field names are as same as field name
+   - cannot decode into a structure without a tag unless all field names are as same as tag names
    - use its own marshaler/unmarshaler (codec.Selfer) interface to decode structure
 
 
