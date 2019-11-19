@@ -6,6 +6,7 @@ import (
 	"github.com/buger/jsonparser"
 	"github.com/json-iterator/go"
 	"github.com/stretchr/testify/require"
+	"github.com/zerosnake0/jzon"
 )
 
 func Test_10Fields_Iterator_Object(t *testing.T) {
@@ -116,6 +117,76 @@ func Test_10Fields_Iterator_Object(t *testing.T) {
 		require.NoError(t, err)
 		require.Equal(t, tenFieldsStructWithTagResult, o)
 	})
+	t.Run(pkgJzonReadObj, func(t *testing.T) {
+		var o tenFieldsStructWithTag
+		jzit := jzon.NewIterator()
+		jzit.ResetBytes(tenFieldsByte)
+		more, field, err := jzit.ReadObjectBegin()
+		require.NoError(t, err)
+		for ; more; more, field, err = jzit.ReadObjectMore() {
+			switch field {
+			case "intf":
+				o.Intf, err = jzit.ReadInt()
+			case "uintf":
+				o.Uintf, err = jzit.ReadUint()
+			case "stringf":
+				o.Stringf, err = jzit.ReadString()
+			case "uuid":
+				o.Uuid, err = jzit.ReadString()
+			case "ip":
+				o.Ip, err = jzit.ReadString()
+			case "email":
+				o.Email, err = jzit.ReadString()
+			case "int32f":
+				o.Int32f, err = jzit.ReadInt32()
+			case "uint32f":
+				o.Uint32f, err = jzit.ReadUint32()
+			case "int64f":
+				o.Int64f, err = jzit.ReadInt64()
+			case "uint64f":
+				o.Uint64f, err = jzit.ReadUint64()
+			default:
+				require.FailNow(t, "unknown field %q", field)
+			}
+			require.NoError(t, err)
+		}
+		require.Equal(t, tenFieldsStructWithTagResult, o)
+	})
+	t.Run(pkgJzonReadObjCB, func(t *testing.T) {
+		var o tenFieldsStructWithTag
+		jzit := jzon.NewIterator()
+		jzit.ResetBytes(tenFieldsByte)
+		err := jzit.ReadObjectCB(func(it *jzon.Iterator, field string) (err error) {
+			switch field {
+			case "intf":
+				o.Intf, err = jzit.ReadInt()
+			case "uintf":
+				o.Uintf, err = jzit.ReadUint()
+			case "stringf":
+				o.Stringf, err = jzit.ReadString()
+			case "uuid":
+				o.Uuid, err = jzit.ReadString()
+			case "ip":
+				o.Ip, err = jzit.ReadString()
+			case "email":
+				o.Email, err = jzit.ReadString()
+			case "int32f":
+				o.Int32f, err = jzit.ReadInt32()
+			case "uint32f":
+				o.Uint32f, err = jzit.ReadUint32()
+			case "int64f":
+				o.Int64f, err = jzit.ReadInt64()
+			case "uint64f":
+				o.Uint64f, err = jzit.ReadUint64()
+			default:
+				require.FailNow(t, "unknown field %q", field)
+			}
+			require.NoError(t, err)
+			return nil
+		})
+		require.NoError(t, err)
+		require.Equal(t, tenFieldsStructWithTagResult, o)
+	})
 }
 
 func Benchmark_10Fields_Iterator_Object(b *testing.B) {
@@ -220,5 +291,69 @@ func Benchmark_10Fields_Iterator_Object(b *testing.B) {
 			})
 		}
 	})
-
+	jzit := jzon.NewIterator()
+	b.Run(pkgJzonReadObj, func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			var o tenFieldsStructWithTag
+			jzit.ResetBytes(tenFieldsByte)
+			more, field, _ := jzit.ReadObjectBegin()
+			for ; more; more, field, _ = jzit.ReadObjectMore() {
+				switch field {
+				case "intf":
+					o.Intf, _ = jzit.ReadInt()
+				case "uintf":
+					o.Uintf, _ = jzit.ReadUint()
+				case "stringf":
+					o.Stringf, _ = jzit.ReadString()
+				case "uuid":
+					o.Uuid, _ = jzit.ReadString()
+				case "ip":
+					o.Ip, _ = jzit.ReadString()
+				case "email":
+					o.Email, _ = jzit.ReadString()
+				case "int32f":
+					o.Int32f, _ = jzit.ReadInt32()
+				case "uint32f":
+					o.Uint32f, _ = jzit.ReadUint32()
+				case "int64f":
+					o.Int64f, _ = jzit.ReadInt64()
+				case "uint64f":
+					o.Uint64f, _ = jzit.ReadUint64()
+				}
+			}
+		}
+	})
+	b.Run(pkgJzonReadObjCB, func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			var o tenFieldsStructWithTag
+			jzit.ResetBytes(tenFieldsByte)
+			jzit.ReadObjectCB(func(it *jzon.Iterator, field string) (err error) {
+				switch field {
+				case "intf":
+					o.Intf, _ = jzit.ReadInt()
+				case "uintf":
+					o.Uintf, _ = jzit.ReadUint()
+				case "stringf":
+					o.Stringf, _ = jzit.ReadString()
+				case "uuid":
+					o.Uuid, _ = jzit.ReadString()
+				case "ip":
+					o.Ip, _ = jzit.ReadString()
+				case "email":
+					o.Email, _ = jzit.ReadString()
+				case "int32f":
+					o.Int32f, _ = jzit.ReadInt32()
+				case "uint32f":
+					o.Uint32f, _ = jzit.ReadUint32()
+				case "int64f":
+					o.Int64f, _ = jzit.ReadInt64()
+				case "uint64f":
+					o.Uint64f, _ = jzit.ReadUint64()
+				}
+				return nil
+			})
+		}
+	})
 }
