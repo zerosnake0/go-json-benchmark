@@ -34,7 +34,7 @@ func (ujsonObjectStore) ArrayAddItem(ai interface{}, v interface{}) error {
 }
 
 func (ujsonObjectStore) NewString(b []byte) (interface{}, error) {
-	quoted := append([]byte{'"'}, b..., )
+	quoted := append([]byte{'"'}, b...)
 	quoted = append(quoted, '"')
 	var s string
 	err := json.Unmarshal(quoted, &s)

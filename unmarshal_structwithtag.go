@@ -1,11 +1,12 @@
 package json_benchmark
 
 import (
-	"testing"
 	"encoding/json"
+	"testing"
 
 	"github.com/json-iterator/go"
 	ugorji "github.com/ugorji/go/codec"
+	"github.com/zerosnake0/jzon"
 )
 
 func Test_Unmarshal_StructWithTag(t *testing.T, f func(t *testing.T, cb func(data []byte, o interface{}) error)) {
@@ -33,6 +34,16 @@ func Test_Unmarshal_StructWithTag(t *testing.T, f func(t *testing.T, cb func(dat
 			h.ErrorIfNoField = true
 			dec := ugorji.NewDecoderBytes(data, &h)
 			return dec.Decode(o)
+		})
+	})
+	t.Run(pkgJzon, func(t *testing.T) {
+		f(t, func(data []byte, o interface{}) error {
+			return jzon.Unmarshal(data, o)
+		})
+	})
+	t.Run(pkgJzonFast, func(t *testing.T) {
+		f(t, func(data []byte, o interface{}) error {
+			return jzonFastDecoder.Unmarshal(data, o)
 		})
 	})
 }

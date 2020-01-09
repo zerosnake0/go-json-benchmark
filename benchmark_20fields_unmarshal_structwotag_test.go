@@ -1,11 +1,12 @@
 package json_benchmark
 
 import (
-	"testing"
 	"encoding/json"
+	"testing"
 
 	"github.com/json-iterator/go"
 	"github.com/stretchr/testify/require"
+	"github.com/zerosnake0/jzon"
 )
 
 func Test_Unmarshal_20Fields_StructWoTag(t *testing.T) {
@@ -30,6 +31,16 @@ func Test_Unmarshal_20Fields_StructWoTag(t *testing.T) {
 			return jsoniter.ConfigCompatibleWithStandardLibrary.Unmarshal(data, o)
 		})
 	})
+	t.Run(pkgJzon, func(t *testing.T) {
+		f(t, func(data []byte, o interface{}) error {
+			return jzon.Unmarshal(data, o)
+		})
+	})
+	// t.Run(pkgJzonFast, func(t *testing.T) {
+	// 	f(t, func(data []byte, o interface{}) error {
+	// 		return jzonFastDecoder.Unmarshal(data, o)
+	// 	})
+	// })
 }
 
 func Benchmark_20Fields_Unmarshal_StructWoTag(b *testing.B) {
@@ -54,4 +65,18 @@ func Benchmark_20Fields_Unmarshal_StructWoTag(b *testing.B) {
 			jsoniter.ConfigCompatibleWithStandardLibrary.Unmarshal(twentyFieldsByte, &o)
 		}
 	})
+	b.Run(pkgJzon, func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			var o twentyFieldsStructWoTag
+			jzon.Unmarshal(twentyFieldsByte, &o)
+		}
+	})
+	// b.Run(pkgJzonFast, func(b *testing.B) {
+	// 	b.ReportAllocs()
+	// 	for i := 0; i < b.N; i++ {
+	// 		var o twentyFieldsStructWoTag
+	// 		jzonFastDecoder.Unmarshal(twentyFieldsByte, &o)
+	// 	}
+	// })
 }
