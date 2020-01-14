@@ -16,57 +16,64 @@ go test -v -bench ./...
 
 # Example result
 
+```shell
+GOGC=off go test -bench=. -benchmem
+```
+
+The result may vary according to the different environment.
+Use the result only as a reference.
+
 |   |   |   | ns/op | B/op | allocs/op |
 | - | - | - | ----- | ---- | --------- |
-| 10Fields_Iterator_Object | jsoniter-readObj-8 | 1243933 | 1072 | 144 | 14 |
-| 10Fields_Iterator_Object | jsoniter-readObjCB-8 | 1000000 | 1126 | 144 | 14 |
-| 10Fields_Iterator_Object | jsonparser-8 | 856482 | 1171 | 80 | 4 |
-| 10Fields_Iterator_Object | jzon-readObjCB-8 | 856426 | 1320 | 144 | 14 |
-| 10Fields_Iterator_Object | jzon-readObj-8 | 749488 | 1386 | 144 | 14 |
+| 10Fields_Iterator_Object | jsoniter-readObjCB-8 | 1325042 | 934 | 144 | 14 |
+| 10Fields_Iterator_Object | jsoniter-readObj-8 | 1202773 | 940 | 144 | 14 |
+| 10Fields_Iterator_Object | jsonparser-8 | 1247815 | 998 | 80 | 4 |
+| 10Fields_Iterator_Object | jzon-readObj-8 | 1000000 | 1066 | 144 | 14 |
+| 10Fields_Iterator_Object | jzon-readObjCB-8 | 1000000 | 1090 | 144 | 14 |
 |   |   |   |   |   |   |
-| 10Fields_Unmarshal_Interface | djson-8 | 521389 | 2464 | 1174 | 27 |
-| 10Fields_Unmarshal_Interface | easyjson-8 | 428254 | 2979 | 1174 | 27 |
-| 10Fields_Unmarshal_Interface | jzon-fast-8 | 374584 | 3080 | 1190 | 28 |
-| 10Fields_Unmarshal_Interface | jzon-8 | 333105 | 3266 | 1190 | 28 |
-| 10Fields_Unmarshal_Interface | ujson-8 | 333092 | 3515 | 1494 | 38 |
-| 10Fields_Unmarshal_Interface | jsoniter-compatible-8 | 333104 | 3908 | 1350 | 38 |
-| 10Fields_Unmarshal_Interface | jsoniter-8 | 333102 | 4008 | 1350 | 38 |
-| 10Fields_Unmarshal_Interface | ugorji-8 | 223449 | 5316 | 2222 | 36 |
-| 10Fields_Unmarshal_Interface | json-8 | 235119 | 5346 | 1414 | 36 |
+| 10Fields_Unmarshal_Interface | djson-8 | 570604 | 2436 | 1174 | 27 |
+| 10Fields_Unmarshal_Interface | jzon-fast-8 | 386988 | 2932 | 1190 | 28 |
+| 10Fields_Unmarshal_Interface | easyjson-8 | 413498 | 2984 | 1174 | 27 |
+| 10Fields_Unmarshal_Interface | jzon-8 | 428096 | 3235 | 1190 | 28 |
+| 10Fields_Unmarshal_Interface | ujson-8 | 352674 | 3416 | 1494 | 38 |
+| 10Fields_Unmarshal_Interface | jsoniter-8 | 324094 | 3554 | 1350 | 38 |
+| 10Fields_Unmarshal_Interface | jsoniter-compatible-8 | 352828 | 3562 | 1350 | 38 |
+| 10Fields_Unmarshal_Interface | ugorji-8 | 239774 | 5138 | 2222 | 36 |
+| 10Fields_Unmarshal_Interface | json-8 | 249818 | 5616 | 1414 | 36 |
 |   |   |   |   |   |   |
-| 10Fields_Unmarshal_StructWithTag | jsoniter-8 | 1000000 | 1125 | 192 | 5 |
-| 10Fields_Unmarshal_StructWithTag | jsoniter-compatible-8 | 1000000 | 1125 | 192 | 5 |
-| 10Fields_Unmarshal_StructWithTag | jzon-8 | 749409 | 1679 | 212 | 15 |
-| 10Fields_Unmarshal_StructWithTag | jzon-fast-8 | 750032 | 1757 | 212 | 15 |
-| 10Fields_Unmarshal_StructWithTag | ugorji-8 | 444151 | 2584 | 832 | 7 |
-| 10Fields_Unmarshal_StructWithTag | json-8 | 249820 | 4743 | 432 | 14 |
+| 10Fields_Unmarshal_StructWithTag | jsoniter-compatible-8 | 1000000 | 1149 | 192 | 5 |
+| 10Fields_Unmarshal_StructWithTag | jsoniter-8 | 922728 | 1180 | 192 | 5 |
+| 10Fields_Unmarshal_StructWithTag | jzon-8 | 922551 | 1286 | 192 | 5 |
+| 10Fields_Unmarshal_StructWithTag | jzon-fast-8 | 921544 | 1387 | 192 | 5 |
+| 10Fields_Unmarshal_StructWithTag | ugorji-8 | 521378 | 2466 | 832 | 7 |
+| 10Fields_Unmarshal_StructWithTag | json-8 | 249806 | 4763 | 432 | 14 |
 |   |   |   |   |   |   |
-| 10Fields_Unmarshal_StructWoTag | jsoniter-8 | 705384 | 1539 | 256 | 15 |
-| 10Fields_Unmarshal_StructWoTag | jsoniter-compatible-8 | 749451 | 1605 | 256 | 15 |
-| 10Fields_Unmarshal_StructWoTag | jzon-8 | 571058 | 1978 | 212 | 15 |
-| 10Fields_Unmarshal_StructWoTag | json-8 | 235126 | 5082 | 432 | 14 |
+| 10Fields_Unmarshal_StructWoTag | jsoniter-8 | 799728 | 1510 | 256 | 15 |
+| 10Fields_Unmarshal_StructWoTag | jsoniter-compatible-8 | 749427 | 1581 | 256 | 15 |
+| 10Fields_Unmarshal_StructWoTag | jzon-8 | 521378 | 2424 | 457 | 5 |
+| 10Fields_Unmarshal_StructWoTag | json-8 | 235059 | 4917 | 432 | 14 |
 |   |   |   |   |   |   |
-| 20Fields_Unmarshal_Interface | djson-8 | 213811 | 4961 | 2715 | 52 |
-| 20Fields_Unmarshal_Interface | jzon-fast-8 | 181683 | 6637 | 2732 | 53 |
-| 20Fields_Unmarshal_Interface | easyjson-8 | 187364 | 6815 | 2715 | 52 |
-| 20Fields_Unmarshal_Interface | jzon-8 | 181689 | 6973 | 2732 | 53 |
-| 20Fields_Unmarshal_Interface | ujson-8 | 159886 | 7523 | 3339 | 73 |
-| 20Fields_Unmarshal_Interface | jsoniter-8 | 157783 | 7782 | 3052 | 73 |
-| 20Fields_Unmarshal_Interface | jsoniter-compatible-8 | 151790 | 8056 | 3051 | 73 |
-| 20Fields_Unmarshal_Interface | json-8 | 115303 | 10319 | 3003 | 67 |
-| 20Fields_Unmarshal_Interface | ugorji-8 | 115303 | 10423 | 3763 | 61 |
+| 20Fields_Unmarshal_Interface | djson-8 | 249829 | 4911 | 2716 | 52 |
+| 20Fields_Unmarshal_Interface | easyjson-8 | 193408 | 6173 | 2715 | 52 |
+| 20Fields_Unmarshal_Interface | jzon-fast-8 | 190345 | 6619 | 2731 | 53 |
+| 20Fields_Unmarshal_Interface | jzon-8 | 175712 | 6880 | 2731 | 53 |
+| 20Fields_Unmarshal_Interface | ujson-8 | 164264 | 7292 | 3339 | 73 |
+| 20Fields_Unmarshal_Interface | jsoniter-compatible-8 | 159880 | 7974 | 3051 | 73 |
+| 20Fields_Unmarshal_Interface | jsoniter-8 | 151768 | 8091 | 3052 | 73 |
+| 20Fields_Unmarshal_Interface | ugorji-8 | 121124 | 10336 | 3763 | 61 |
+| 20Fields_Unmarshal_Interface | json-8 | 100768 | 10358 | 3004 | 67 |
 |   |   |   |   |   |   |
-| 20Fields_Unmarshal_StructWithTag | ugorji-8 | 499627 | 2381 | 832 | 7 |
-| 20Fields_Unmarshal_StructWithTag | jsoniter-8 | 399579 | 2973 | 512 | 29 |
-| 20Fields_Unmarshal_StructWithTag | jsoniter-compatible-8 | 413475 | 3016 | 512 | 29 |
-| 20Fields_Unmarshal_StructWithTag | jzon-fast-8 | 370143 | 3163 | 408 | 29 |
-| 20Fields_Unmarshal_StructWithTag | jzon-8 | 352695 | 3235 | 408 | 29 |
-| 20Fields_Unmarshal_StructWithTag | json-8 | 131776 | 9926 | 648 | 24 |
+| 20Fields_Unmarshal_StructWithTag | ugorji-8 | 521350 | 2292 | 832 | 7 |
+| 20Fields_Unmarshal_StructWithTag | jzon-8 | 479347 | 2758 | 368 | 9 |
+| 20Fields_Unmarshal_StructWithTag | jzon-fast-8 | 363368 | 2795 | 368 | 9 |
+| 20Fields_Unmarshal_StructWithTag | jsoniter-compatible-8 | 324087 | 3103 | 512 | 29 |
+| 20Fields_Unmarshal_StructWithTag | jsoniter-8 | 399728 | 3262 | 512 | 29 |
+| 20Fields_Unmarshal_StructWithTag | json-8 | 111030 | 9319 | 648 | 24 |
 |   |   |   |   |   |   |
-| 20Fields_Unmarshal_StructWoTag | jsoniter-8 | 413481 | 2897 | 512 | 29 |
-| 20Fields_Unmarshal_StructWoTag | jsoniter-compatible-8 | 413498 | 2931 | 512 | 29 |
-| 20Fields_Unmarshal_StructWoTag | jzon-8 | 244722 | 4678 | 408 | 29 |
-| 20Fields_Unmarshal_StructWoTag | json-8 | 111020 | 11700 | 648 | 24 |
+| 20Fields_Unmarshal_StructWoTag | jsoniter-8 | 428280 | 2911 | 512 | 29 |
+| 20Fields_Unmarshal_StructWoTag | jsoniter-compatible-8 | 386800 | 2936 | 512 | 29 |
+| 20Fields_Unmarshal_StructWoTag | jzon-8 | 230370 | 5426 | 1120 | 9 |
+| 20Fields_Unmarshal_StructWoTag | json-8 | 113130 | 10774 | 648 | 24 |
 |   |   |   |   |   |   |
 
 # TODO
