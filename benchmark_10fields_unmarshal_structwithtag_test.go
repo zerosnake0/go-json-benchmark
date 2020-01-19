@@ -6,6 +6,7 @@ import (
 
 	"github.com/json-iterator/go"
 	"github.com/stretchr/testify/require"
+	"github.com/tidwall/gjson"
 	ugorji "github.com/ugorji/go/codec"
 	"github.com/zerosnake0/jzon"
 )
@@ -52,6 +53,13 @@ func Benchmark_10Fields_Unmarshal_StructWithTag(b *testing.B) {
 			dec := ugorji.NewDecoderBytes(tenFieldsByte, &h)
 			var o tenFieldsStructWithTag
 			dec.Decode(&o)
+		}
+	})
+	b.Run(pkgGJson, func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			var o tenFieldsStructWithTag
+			gjson.Unmarshal(tenFieldsByte, &o)
 		}
 	})
 	b.Run(pkgJzon, func(b *testing.B) {

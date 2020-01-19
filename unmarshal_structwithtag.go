@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/json-iterator/go"
+	"github.com/tidwall/gjson"
 	ugorji "github.com/ugorji/go/codec"
 	"github.com/zerosnake0/jzon"
 )
@@ -34,6 +35,11 @@ func Test_Unmarshal_StructWithTag(t *testing.T, f func(t *testing.T, cb func(dat
 			h.ErrorIfNoField = true
 			dec := ugorji.NewDecoderBytes(data, &h)
 			return dec.Decode(o)
+		})
+	})
+	t.Run(pkgGJson, func(t *testing.T) {
+		f(t, func(data []byte, o interface{}) error {
+			return gjson.Unmarshal(data, o)
 		})
 	})
 	t.Run(pkgJzon, func(t *testing.T) {

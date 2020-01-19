@@ -11,6 +11,7 @@ const (
 	pkgEasyJson           = "easyjson"
 	pkgUjson              = "ujson"
 	pkgUgorji             = "ugorji"
+	pkgGJson              = "gjson"
 	pkgJzon               = "jzon"
 	pkgJzonFast           = "jzon-fast"
 	pkgJzonReadObj        = "jzon-readObj"

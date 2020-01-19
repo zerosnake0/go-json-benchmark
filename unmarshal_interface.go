@@ -8,6 +8,7 @@ import (
 	"github.com/json-iterator/go"
 	"github.com/mailru/easyjson/jlexer"
 	"github.com/mreiferson/go-ujson"
+	"github.com/tidwall/gjson"
 	ugorji "github.com/ugorji/go/codec"
 	"github.com/zerosnake0/jzon"
 )
@@ -59,6 +60,12 @@ func Test_Unmarshal_Interface(t *testing.T, f func(t *testing.T, cb func(data []
 				MapKeyAsString: true,
 			})
 			err = dec.Decode(&o)
+			return
+		})
+	})
+	t.Run(pkgGJson, func(t *testing.T) {
+		f(t, func(data []byte) (o interface{}, err error) {
+			err = gjson.Unmarshal(data, &o)
 			return
 		})
 	})
@@ -128,6 +135,13 @@ func Benchmark_Unmarshal_Interface(b *testing.B, data []byte) {
 			})
 			var o interface{}
 			dec.Decode(&o)
+		}
+	})
+	b.Run(pkgGJson, func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			var o interface{}
+			gjson.Unmarshal(data, &o)
 		}
 	})
 	b.Run(pkgJzon, func(b *testing.B) {

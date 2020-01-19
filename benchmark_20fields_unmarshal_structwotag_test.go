@@ -36,11 +36,6 @@ func Test_Unmarshal_20Fields_StructWoTag(t *testing.T) {
 			return jzon.Unmarshal(data, o)
 		})
 	})
-	// t.Run(pkgJzonFast, func(t *testing.T) {
-	// 	f(t, func(data []byte, o interface{}) error {
-	// 		return jzonFastDecoder.Unmarshal(data, o)
-	// 	})
-	// })
 }
 
 func Benchmark_20Fields_Unmarshal_StructWoTag(b *testing.B) {
@@ -72,11 +67,4 @@ func Benchmark_20Fields_Unmarshal_StructWoTag(b *testing.B) {
 			jzon.Unmarshal(twentyFieldsByte, &o)
 		}
 	})
-	// b.Run(pkgJzonFast, func(b *testing.B) {
-	// 	b.ReportAllocs()
-	// 	for i := 0; i < b.N; i++ {
-	// 		var o twentyFieldsStructWoTag
-	// 		jzonFastDecoder.Unmarshal(twentyFieldsByte, &o)
-	// 	}
-	// })
 }
