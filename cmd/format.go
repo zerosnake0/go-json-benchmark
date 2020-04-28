@@ -5,6 +5,8 @@ import (
 	"log"
 	"sort"
 	"strings"
+
+	"golang.org/x/tools/benchmark/parse"
 )
 
 var s = `
@@ -67,15 +69,7 @@ Benchmark_20Fields_Valid/gjson-8                                                
 Benchmark_20Fields_Valid/jzon-8                                                  1052240              1223 ns/op               0 B/op          0 allocs/op
 `
 
-type result struct {
-	Name     string
-	N        int
-	NsOp     int
-	BOp      int
-	AllocsOp int
-}
-
-type resList []result
+type resList []*parse.Benchmark
 
 var _ sort.Interface = resList{}
 
@@ -84,7 +78,7 @@ func (l resList) Len() int {
 }
 
 func (l resList) Less(i, j int) bool {
-	return l[i].NsOp < l[j].NsOp
+	return l[i].NsPerOp < l[j].NsPerOp
 }
 
 func (l resList) Swap(i, j int) {
@@ -92,50 +86,48 @@ func (l resList) Swap(i, j int) {
 }
 
 const (
-	head  = "|   |   |   | ns/op | B/op | allocs/op |"
-	head2 = "| - | - | - | ----- | ---- | --------- |"
-	sep   = "|   |   |   |   |   |   |"
+	head  = "|     |     |     | ns/op | B/op | allocs/op |"
+	head2 = "| --- | --- | --- | ----- | ---- | --------- |"
+	sep   = "|     |     |     |       |      |           |"
 )
 
 func main() {
+	set, err := parse.ParseSet(strings.NewReader(s))
+	if err != nil {
+		log.Fatalf("error while parsing: %v", err)
+	}
+
 	var keys []string
 	m := map[string]resList{}
-	for _, line := range strings.Split(s, "\n") {
-		line = strings.TrimSpace(line)
-		if line == "" {
-			continue
+	for name, arr := range set {
+		nameArr := strings.SplitN(strings.TrimPrefix(name, "Benchmark_"), "/", 2)
+		if len(nameArr) != 2 {
+			log.Fatalf("invalid test name %q", name)
 		}
-		line = strings.TrimPrefix(line, "Benchmark_")
-		var (
-			name string
-			res  result
-		)
-		n, err := fmt.Sscanf(line, "%s %d %d ns/op %d B/op %d allocs/op",
-			&name, &res.N, &res.NsOp, &res.BOp, &res.AllocsOp)
-		if err != nil {
-			log.Fatal(err)
-		}
-		if n != 5 {
-			log.Fatalf("%d parsed instead of 5", n)
-		}
+		subName := nameArr[0]
 
-		arr := strings.SplitN(name, "/", 2)
-		res.Name = arr[1]
-		name = arr[0]
-		if _, ok := m[name]; !ok {
-			keys = append(keys, name)
+		if len(arr) != 1 {
+			log.Fatalf("duplicate test %q", name)
 		}
-		m[name] = append(m[name], res)
+		bench := arr[0]
+		bench.Name = nameArr[1]
 
+		if _, ok := m[subName]; !ok {
+			keys = append(keys, subName)
+		}
+		m[subName] = append(m[subName], bench)
 	}
+
 	fmt.Println(head)
 	fmt.Println(head2)
+
+	sort.Strings(keys)
 	for _, k := range keys {
 		arr := m[k]
 		sort.Sort(arr)
 		for _, item := range arr {
-			fmt.Printf("| %s | %s | %d | %d | %d | %d |\n", k, item.Name,
-				item.N, item.NsOp, item.BOp, item.AllocsOp)
+			fmt.Printf("| %s | %s | %d | %.0f | %d | %d |\n", k, item.Name,
+				item.N, item.NsPerOp, item.AllocedBytesPerOp, item.AllocsPerOp)
 		}
 		fmt.Println(sep)
 	}
