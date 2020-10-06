@@ -1,3 +1,5 @@
+[![Mentioned in Awesome Go](https://awesome.re/mentioned-badge.svg)](https://github.com/avelino/awesome-go)
+
 # Introduction
 
 This is a benchmark for the json packages.
