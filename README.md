@@ -105,17 +105,17 @@ Use the result only as a reference.
 
 ## feature list
 
-| repo | unmarshal (interface) | unmarshal (struct) | iterator | valid |
-| -------------------------------------- | --------------- | --------------- | --- | --- |
-| encoding/json                          | x               | x               |     |  x  |
-| github.com/json-iterator/go            | x               | x               |  x  |  x  |
-| github.com/buger/jsonparser            |                 |                 |  x  |     |
-| github.com/a8m/djson                   | x               |                 |     |     |
-| github.com/mailru/easyjson             | x               | <sup>(1)</sup>  |     |     |
-| github.com/mreiferson/go-ujson         | x<sup>(2)</sup> |                 |     |     |
-| github.com/ugorji/go/codec             | x<sup>(3)</sup> | x<sup>(4)</sup> |     |     |
-| github.com/tidwall/gjson<sup>(5)</sup> |                 | <sup>(6)</sup>  |     |  x  |
-| github.com/zerosnake0/jzon             | x               | x               |  x  |  x  |
+| repo | version | unmarshal (interface) | unmarshal (struct) | iterator | valid |
+| -------------------------------------- | ------- | --------------- | --------------- | --- | --- |
+| encoding/json                          | 1.15.2  | x               | x               |     |  x  |
+| github.com/json-iterator/go            | 1.1.10  | x               | x               |  x  |  x  |
+| github.com/buger/jsonparser            | 1.0.0   |                 |                 |  x  |     |
+| github.com/a8m/djson                   | c02c5ae | x               |                 |     |     |
+| github.com/mailru/easyjson             | 0.7.6   | x               | <sup>(1)</sup>  |     |     |
+| github.com/mreiferson/go-ujson         | c02629f | x<sup>(2)</sup> |                 |     |     |
+| github.com/ugorji/go/codec             | 1.1.10  | x<sup>(3)</sup> | x<sup>(4)</sup> |     |     |
+| github.com/tidwall/gjson<sup>(5)</sup> | 1.6.1   |                 | <sup>(6)</sup>  |     |  x  |
+| github.com/zerosnake0/jzon             | 0.0.5   | x               | x               |  x  |  x  |
 
 ### notes:
 1. easyjson use its own marshaler/unmarshaler, which is not tested
@@ -125,7 +125,7 @@ Use the result only as a reference.
    - can decode into a structure with tag
    - cannot decode into a structure without a tag unless all field names are as same as tag names
    - use its own marshaler/unmarshaler (codec.Selfer) interface to decode structure
-5. gjson deprecated its unmarshal method from `v1.4.0`
+5. gjson deprecated its unmarshal methods from `v1.4.0`
 6. gjson only decode into structure fields with tag (`<= v1.3.6`)
 
 
