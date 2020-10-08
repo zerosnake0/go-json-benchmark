@@ -4,8 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/json-iterator/go"
-	"github.com/tidwall/gjson"
+	jsoniter "github.com/json-iterator/go"
 	ugorji "github.com/ugorji/go/codec"
 	"github.com/zerosnake0/jzon"
 )
@@ -37,11 +36,6 @@ func Test_Unmarshal_StructWithTag(t *testing.T, f func(t *testing.T, cb func(dat
 			return dec.Decode(o)
 		})
 	})
-	t.Run(pkgGJson, func(t *testing.T) {
-		f(t, func(data []byte, o interface{}) error {
-			return gjson.Unmarshal(data, o)
-		})
-	})
 	t.Run(pkgJzon, func(t *testing.T) {
 		f(t, func(data []byte, o interface{}) error {
 			return jzon.Unmarshal(data, o)
@@ -49,7 +43,7 @@ func Test_Unmarshal_StructWithTag(t *testing.T, f func(t *testing.T, cb func(dat
 	})
 	t.Run(pkgJzonFast, func(t *testing.T) {
 		f(t, func(data []byte, o interface{}) error {
-			return jzonFastDecoder.Unmarshal(data, o)
+			return jzonFastDecoderConfig.Unmarshal(data, o)
 		})
 	})
 }

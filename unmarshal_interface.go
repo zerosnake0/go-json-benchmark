@@ -5,10 +5,9 @@ import (
 	"testing"
 
 	"github.com/a8m/djson"
-	"github.com/json-iterator/go"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/mailru/easyjson/jlexer"
 	"github.com/mreiferson/go-ujson"
-	"github.com/tidwall/gjson"
 	ugorji "github.com/ugorji/go/codec"
 	"github.com/zerosnake0/jzon"
 )
@@ -63,12 +62,6 @@ func Test_Unmarshal_Interface(t *testing.T, f func(t *testing.T, cb func(data []
 			return
 		})
 	})
-	t.Run(pkgGJson, func(t *testing.T) {
-		f(t, func(data []byte) (o interface{}, err error) {
-			err = gjson.Unmarshal(data, &o)
-			return
-		})
-	})
 	t.Run(pkgJzon, func(t *testing.T) {
 		f(t, func(data []byte) (o interface{}, err error) {
 			err = jzon.Unmarshal(data, &o)
@@ -77,7 +70,7 @@ func Test_Unmarshal_Interface(t *testing.T, f func(t *testing.T, cb func(data []
 	})
 	t.Run(pkgJzonFast, func(t *testing.T) {
 		f(t, func(data []byte) (o interface{}, err error) {
-			err = jzonFastDecoder.Unmarshal(data, &o)
+			err = jzonFastDecoderConfig.Unmarshal(data, &o)
 			return
 		})
 	})
@@ -137,13 +130,6 @@ func Benchmark_Unmarshal_Interface(b *testing.B, data []byte) {
 			dec.Decode(&o)
 		}
 	})
-	b.Run(pkgGJson, func(b *testing.B) {
-		b.ReportAllocs()
-		for i := 0; i < b.N; i++ {
-			var o interface{}
-			gjson.Unmarshal(data, &o)
-		}
-	})
 	b.Run(pkgJzon, func(b *testing.B) {
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {
@@ -155,7 +141,7 @@ func Benchmark_Unmarshal_Interface(b *testing.B, data []byte) {
 		b.ReportAllocs()
 		for i := 0; i < b.N; i++ {
 			var o interface{}
-			jzonFastDecoder.Unmarshal(data, &o)
+			jzonFastDecoderConfig.Unmarshal(data, &o)
 		}
 	})
 }
