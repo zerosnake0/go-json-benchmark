@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/buger/jsonparser"
-	"github.com/json-iterator/go"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/stretchr/testify/require"
 	"github.com/zerosnake0/jzon"
 )

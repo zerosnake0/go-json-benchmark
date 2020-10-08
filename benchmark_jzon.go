@@ -5,7 +5,7 @@ import (
 )
 
 var (
-	jzonFastDecoder = jzon.NewDecoder(&jzon.DecoderOption{
+	jzonFastDecoderConfig = jzon.NewDecoderConfig(&jzon.DecoderOption{
 		CaseSensitive: true,
 	})
 )
