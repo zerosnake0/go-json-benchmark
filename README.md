@@ -38,22 +38,19 @@ Use the result only as a reference.
 | 10Fields_Unmarshal_Interface | jzon-8 | 414544 | 2904 | 1190 | 28 |
 | 10Fields_Unmarshal_Interface | jzon-fast-8 | 425950 | 2917 | 1190 | 28 |
 | 10Fields_Unmarshal_Interface | ujson-8 | 337881 | 3494 | 1494 | 38 |
-| 10Fields_Unmarshal_Interface | jsoniter-compatible-8 | 320720 | 3758 | 1350 |
-38 |
+| 10Fields_Unmarshal_Interface | jsoniter-compatible-8 | 320720 | 3758 | 1350 | 38 |
 | 10Fields_Unmarshal_Interface | jsoniter-8 | 347126 | 4216 | 1350 | 38 |
 | 10Fields_Unmarshal_Interface | json-8 | 229218 | 5532 | 1414 | 36 |
 | 10Fields_Unmarshal_Interface | ugorji-8 | 212991 | 5608 | 2478 | 36 |
 |     |     |     |       |      |           |
 | 10Fields_Unmarshal_StructWithTag | jsoniter-8 | 1000000 | 1028 | 192 | 5 |
-| 10Fields_Unmarshal_StructWithTag | jsoniter-compatible-8 | 1223282 | 1034 | 19
-2 | 5 |
+| 10Fields_Unmarshal_StructWithTag | jsoniter-compatible-8 | 1223282 | 1034 | 192 | 5 |
 | 10Fields_Unmarshal_StructWithTag | jzon-8 | 1000000 | 1106 | 192 | 5 |
 | 10Fields_Unmarshal_StructWithTag | jzon-fast-8 | 1000000 | 1132 | 192 | 5 |
 | 10Fields_Unmarshal_StructWithTag | ugorji-8 | 476871 | 2705 | 1088 | 7 |
 | 10Fields_Unmarshal_StructWithTag | json-8 | 274917 | 4346 | 432 | 14 |
 |     |     |     |       |      |           |
-| 10Fields_Unmarshal_StructWoTag | jsoniter-compatible-8 | 887858 | 1406 | 256 |
- 15 |
+| 10Fields_Unmarshal_StructWoTag | jsoniter-compatible-8 | 887858 | 1406 | 256 | 15 |
 | 10Fields_Unmarshal_StructWoTag | jsoniter-8 | 872038 | 1451 | 256 | 15 |
 | 10Fields_Unmarshal_StructWoTag | jzon-8 | 694782 | 1607 | 192 | 5 |
 | 10Fields_Unmarshal_StructWoTag | json-8 | 242374 | 4879 | 432 | 14 |
@@ -69,8 +66,7 @@ Use the result only as a reference.
 | 20Fields_Unmarshal_Interface | djson-8 | 238552 | 6606 | 2716 | 52 |
 | 20Fields_Unmarshal_Interface | easyjson-8 | 194299 | 6974 | 2716 | 52 |
 | 20Fields_Unmarshal_Interface | ujson-8 | 163780 | 7551 | 3340 | 73 |
-| 20Fields_Unmarshal_Interface | jsoniter-compatible-8 | 150829 | 7872 | 3051 |
-73 |
+| 20Fields_Unmarshal_Interface | jsoniter-compatible-8 | 150829 | 7872 | 3051 | 73 |
 | 20Fields_Unmarshal_Interface | jsoniter-8 | 139962 | 8286 | 3051 | 73 |
 | 20Fields_Unmarshal_Interface | json-8 | 121875 | 10689 | 3003 | 67 |
 | 20Fields_Unmarshal_Interface | ugorji-8 | 119270 | 10768 | 4018 | 61 |
@@ -79,12 +75,10 @@ Use the result only as a reference.
 | 20Fields_Unmarshal_StructWithTag | jzon-fast-8 | 497636 | 2402 | 368 | 9 |
 | 20Fields_Unmarshal_StructWithTag | ugorji-8 | 484503 | 2532 | 1088 | 7 |
 | 20Fields_Unmarshal_StructWithTag | jsoniter-8 | 420992 | 2780 | 512 | 29 |
-| 20Fields_Unmarshal_StructWithTag | jsoniter-compatible-8 | 420163 | 2877 | 512
- | 29 |
+| 20Fields_Unmarshal_StructWithTag | jsoniter-compatible-8 | 420163 | 2877 | 512 | 29 |
 | 20Fields_Unmarshal_StructWithTag | json-8 | 145645 | 8466 | 648 | 24 |
 |     |     |     |       |      |           |
-| 20Fields_Unmarshal_StructWoTag | jsoniter-compatible-8 | 425262 | 2724 | 512 |
- 29 |
+| 20Fields_Unmarshal_StructWoTag | jsoniter-compatible-8 | 425262 | 2724 | 512 | 29 |
 | 20Fields_Unmarshal_StructWoTag | jsoniter-8 | 435942 | 2758 | 512 | 29 |
 | 20Fields_Unmarshal_StructWoTag | jzon-8 | 251348 | 4908 | 1057 | 9 |
 | 20Fields_Unmarshal_StructWoTag | json-8 | 116900 | 9759 | 648 | 24 |
